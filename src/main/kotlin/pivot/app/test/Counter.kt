@@ -1,9 +1,8 @@
 package pivot.app.test
 
-import org.springframework.stereotype.Service
-
-@Service
-class Counter(private var counter: Int = 0) {
+class Counter(
+    private var counter: Int = 0
+) {
 
 
     fun inc() {

@@ -1,4 +1,4 @@
 CREATE TABLE counter (
-  id SERIAL PRIMARY KEY,
-  value BIGINT NOT NULL
+  id INT PRIMARY KEY,
+  value INT NOT NULL
 );

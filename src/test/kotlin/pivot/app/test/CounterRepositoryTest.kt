@@ -9,7 +9,6 @@ import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 @JooqTest
@@ -28,11 +27,17 @@ class CounterRepositoryTest() {
     @Test
     fun saveAndFindCounter() {
         val toSave = Counter(5)
-        val id = counterRepository.save(toSave)
-        assertNotNull(id)
-        val loaded = counterRepository.findCounterById(id)
-        assertNotNull(loaded)
-        assertEquals(5, loaded.value())
+        counterRepository.save(2, toSave)
+        val loaded = counterRepository.findCounterById(2)
+        assertEquals(5, loaded?.value())
+    }
+
+    @Test
+    fun saveThenUpdatedCounter() {
+        counterRepository.save(2, Counter(5))
+        counterRepository.save(2, Counter(17))
+        val loaded = counterRepository.findCounterById(2)
+        assertEquals(17, loaded?.value())
     }
 
     companion object {

@@ -18,16 +18,18 @@ class CounterRepository(private val dsl: DSLContext) {
         val record = optionalRecord.get()
         val value = record.value
 
-        return value?.let { Counter(it.toInt()) }
+        return value?.let { Counter(it) }
     }
 
-    fun save(counter: Counter): Int {
-        val record =
-            dsl.insertInto(COUNTER, COUNTER.VALUE)
-                .values(counter.value().toLong())
-                .returning(COUNTER.ID)
-                .fetchOne()
-        val id = record?.id
-        return id ?: throw IllegalStateException("Failed to insert counter")
+    fun save(id: Int, counter: Counter) {
+        if (dsl.fetchExists(COUNTER, COUNTER.ID.eq(id)))
+            dsl.update(COUNTER)
+                .set(COUNTER.VALUE, counter.value())
+                .where(COUNTER.ID.eq(id))
+                .execute()
+        else
+            dsl.insertInto(COUNTER, COUNTER.ID, COUNTER.VALUE)
+                .values(id, counter.value())
+                .execute()
     }
 }

@@ -8,22 +8,26 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/")
 class CounterController(
-    private val counter: Counter
+    private val counterRepo: CounterRepository
 ) {
 
     @GetMapping("/counter")
-    fun getCounter() = this.counter.value()
+    fun getCounter() = this.counterRepo.findCounterById(1) ?: Counter(0)
 
     @PostMapping("/counter/inc")
     fun incCounter(): Int {
-        this.counter.inc()
-        return this.counter.value()
+        val counter = this.counterRepo.findCounterById(1) ?: Counter(0)
+        counter.inc()
+        this.counterRepo.save(1, counter)
+        return counter.value()
     }
 
     @PostMapping("/counter/dec")
     fun decCounter(): Int {
-        this.counter.dec()
-        return this.counter.value()
+        val counter = this.counterRepo.findCounterById(1) ?: Counter(0)
+        counter.dec()
+        this.counterRepo.save(1, counter)
+        return counter.value()
     }
 
 }
