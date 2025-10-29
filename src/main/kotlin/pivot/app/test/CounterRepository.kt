@@ -1,26 +1,33 @@
 package pivot.app.test
 
+import com.sivalabs.bookmarks.jooq.tables.Counter.COUNTER
 import org.jooq.DSLContext
 import org.springframework.stereotype.Repository
 
 
 @Repository
 class CounterRepository(private val dsl: DSLContext) {
-    fun findCounterById(id: Long): Counter? {
-        val optionalRecord = dsl.resultQuery("select * from counter where id = ?", id)
+    fun findCounterById(id: Int): Counter? {
+        val optionalRecord = dsl
+            .selectFrom(COUNTER)
+            .where(COUNTER.ID.eq(id))
             .fetchOptional()
+
         if (optionalRecord.isEmpty) return null
 
         val record = optionalRecord.get()
-        val value = record.get("value", Long::class.java)
+        val value = record.value
 
         return value?.let { Counter(it.toInt()) }
     }
 
-    fun save(counter: Counter): Long {
-        val record = dsl.resultQuery("insert into counter (value) values (?) returning id", counter.value())
-            .fetchOne()
-        val id = record?.get("id", Long::class.java)
+    fun save(counter: Counter): Int {
+        val record =
+            dsl.insertInto(COUNTER, COUNTER.VALUE)
+                .values(counter.value().toLong())
+                .returning(COUNTER.ID)
+                .fetchOne()
+        val id = record?.id
         return id ?: throw IllegalStateException("Failed to insert counter")
     }
 }
