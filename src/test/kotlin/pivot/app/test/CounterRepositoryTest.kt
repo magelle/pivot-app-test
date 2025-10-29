@@ -1,0 +1,43 @@
+package pivot.app.test
+
+import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.jooq.JooqTest
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection
+import org.springframework.context.annotation.Import
+import org.testcontainers.containers.PostgreSQLContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
+
+@JooqTest
+@Import(CounterRepository::class)
+@Testcontainers
+class CounterRepositoryTest() {
+    @Autowired
+    private lateinit var counterRepository: CounterRepository
+
+    @Test
+    fun findUserNameById() {
+        val counter: Counter? = counterRepository.findCounterById(1)
+        assertNull(counter)
+    }
+
+    @Test
+    fun saveAndFindCounter() {
+        val toSave = Counter(5)
+        val id = counterRepository.save(toSave)
+        assertNotNull(id)
+        val loaded = counterRepository.findCounterById(id)
+        assertNotNull(loaded)
+        assertEquals(5, loaded.value())
+    }
+
+    companion object {
+        @Container
+        @ServiceConnection
+        val postgres: PostgreSQLContainer<*> = PostgreSQLContainer("postgres:latest")
+    }
+}
