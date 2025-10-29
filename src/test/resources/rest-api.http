@@ -1,0 +1,13 @@
+### Get Counter value
+GET http://localhost:8080/counter
+Accept: application/json
+
+### Increment Counter Value
+
+POST http://localhost:8080/counter/inc
+Accept: application/json
+
+
+### ### Decrement Counter Value
+POST http://localhost:8080/counter/dec
+Accept: application/json
