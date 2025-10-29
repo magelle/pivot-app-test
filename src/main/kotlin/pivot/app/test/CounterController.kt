@@ -12,7 +12,7 @@ class CounterController(
 ) {
 
     @GetMapping("/counter")
-    fun getCounter() = this.counterRepo.findCounterById(1) ?: Counter(0)
+    fun getCounter() = (this.counterRepo.findCounterById(1) ?: Counter(0)).value()
 
     @PostMapping("/counter/inc")
     fun incCounter(): Int {
