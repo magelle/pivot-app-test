@@ -8,17 +8,17 @@ import org.springframework.context.annotation.Import
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
-import pivot.app.test.counter.domain.objects.CounterRepository
+import pivot.app.test.counter.adapters.PostgresCounterRepository
 import pivot.app.test.counter.domain.objects.Counter
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 @JooqTest
-@Import(CounterRepository::class)
+@Import(PostgresCounterRepository::class)
 @Testcontainers
-class CounterRepositoryTest() {
+class PostgresCounterRepositoryTest() {
     @Autowired
-    private lateinit var counterRepository: CounterRepository
+    private lateinit var counterRepository: PostgresCounterRepository
 
     @Test
     fun findUserNameById() {
