@@ -1,4 +1,4 @@
-package pivot.app.test
+package pivot.app.test.counter
 
 import org.junit.Test
 import kotlin.test.assertEquals

@@ -1,4 +1,4 @@
-package pivot.app.test
+package pivot.app.test.counter
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

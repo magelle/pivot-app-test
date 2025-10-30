@@ -1,4 +1,4 @@
-package pivot.app.test
+package pivot.app.test.counter
 
 import com.sivalabs.bookmarks.jooq.tables.Counter.COUNTER
 import org.jooq.DSLContext

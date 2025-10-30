@@ -1,7 +1,8 @@
-package pivot.app.test
+package pivot.app.test.counter
 
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 @RestController
 @RequestMapping("/")
@@ -12,7 +13,7 @@ class CounterController(
     @PutMapping("/counter/create")
     fun getCounter(): Int {
         val counter = Counter(0)
-        val id = LocalDateTime.now().toEpochSecond(java.time.ZoneOffset.UTC).toInt()
+        val id = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC).toInt()
         this.counterRepo.save(id, counter)
         return id
     }
