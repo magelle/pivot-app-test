@@ -1,4 +1,4 @@
-package pivot.app.test.counter
+package pivot.app.test.counter.domain.objects
 
 class Counter(
     private var counter: Int = 0

@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Import
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
+import pivot.app.test.counter.domain.objects.CounterRepository
+import pivot.app.test.counter.domain.objects.Counter
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
@@ -20,7 +22,7 @@ class CounterRepositoryTest() {
 
     @Test
     fun findUserNameById() {
-        val counter: Counter? = counterRepository.findCounterById(1)
+        val counter: Counter? = counterRepository.findById(1)
         assertNull(counter)
     }
 
@@ -28,7 +30,7 @@ class CounterRepositoryTest() {
     fun saveAndFindCounter() {
         val toSave = Counter(5)
         counterRepository.save(2, toSave)
-        val loaded = counterRepository.findCounterById(2)
+        val loaded = counterRepository.findById(2)
         assertEquals(5, loaded?.value())
     }
 
@@ -36,7 +38,7 @@ class CounterRepositoryTest() {
     fun saveThenUpdatedCounter() {
         counterRepository.save(2, Counter(5))
         counterRepository.save(2, Counter(17))
-        val loaded = counterRepository.findCounterById(2)
+        val loaded = counterRepository.findById(2)
         assertEquals(17, loaded?.value())
     }
 

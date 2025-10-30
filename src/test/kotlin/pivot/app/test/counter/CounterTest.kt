@@ -1,6 +1,7 @@
 package pivot.app.test.counter
 
 import org.junit.Test
+import pivot.app.test.counter.domain.objects.Counter
 import kotlin.test.assertEquals
 
 class CounterTest {
