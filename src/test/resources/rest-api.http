@@ -1,13 +1,17 @@
+### Create a new counter
+PUT http://localhost:8080/counter/create
+Accept: application/json
+
 ### Get Counter value
-GET http://localhost:8080/counter
+GET http://localhost:8080/counter/1761819505
 Accept: application/json
 
 ### Increment Counter Value
 
-POST http://localhost:8080/counter/inc
+POST http://localhost:8080/counter/1761819505/inc
 Accept: application/json
 
 
 ### ### Decrement Counter Value
-POST http://localhost:8080/counter/dec
+POST http://localhost:8080/counter/1761819505/dec
 Accept: application/json
