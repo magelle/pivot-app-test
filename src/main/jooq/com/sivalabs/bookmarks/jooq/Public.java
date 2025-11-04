@@ -5,6 +5,7 @@ package com.sivalabs.bookmarks.jooq;
 
 
 import com.sivalabs.bookmarks.jooq.tables.Counter;
+import com.sivalabs.bookmarks.jooq.tables.PurchaseRequest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +34,11 @@ public class Public extends SchemaImpl {
     public final Counter COUNTER = Counter.COUNTER;
 
     /**
+     * The table <code>public.purchase_request</code>.
+     */
+    public final PurchaseRequest PURCHASE_REQUEST = PurchaseRequest.PURCHASE_REQUEST;
+
+    /**
      * No further instances allowed
      */
     private Public() {
@@ -48,7 +54,8 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            Counter.COUNTER
+            Counter.COUNTER,
+            PurchaseRequest.PURCHASE_REQUEST
         );
     }
 }

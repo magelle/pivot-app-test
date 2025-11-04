@@ -5,6 +5,7 @@ package com.sivalabs.bookmarks.jooq;
 
 
 import com.sivalabs.bookmarks.jooq.tables.Counter;
+import com.sivalabs.bookmarks.jooq.tables.PurchaseRequest;
 
 
 /**
@@ -17,4 +18,9 @@ public class Tables {
      * The table <code>public.counter</code>.
      */
     public static final Counter COUNTER = Counter.COUNTER;
+
+    /**
+     * The table <code>public.purchase_request</code>.
+     */
+    public static final PurchaseRequest PURCHASE_REQUEST = PurchaseRequest.PURCHASE_REQUEST;
 }

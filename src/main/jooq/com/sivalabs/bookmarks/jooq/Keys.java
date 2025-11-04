@@ -5,7 +5,9 @@ package com.sivalabs.bookmarks.jooq;
 
 
 import com.sivalabs.bookmarks.jooq.tables.Counter;
+import com.sivalabs.bookmarks.jooq.tables.PurchaseRequest;
 import com.sivalabs.bookmarks.jooq.tables.records.CounterRecord;
+import com.sivalabs.bookmarks.jooq.tables.records.PurchaseRequestRecord;
 
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -25,4 +27,5 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<CounterRecord> COUNTER_PKEY = Internal.createUniqueKey(Counter.COUNTER, DSL.name("counter_pkey"), new TableField[] { Counter.COUNTER.ID }, true);
+    public static final UniqueKey<PurchaseRequestRecord> PURCHASE_REQUEST_PKEY = Internal.createUniqueKey(PurchaseRequest.PURCHASE_REQUEST, DSL.name("purchase_request_pkey"), new TableField[] { PurchaseRequest.PURCHASE_REQUEST.ID }, true);
 }
