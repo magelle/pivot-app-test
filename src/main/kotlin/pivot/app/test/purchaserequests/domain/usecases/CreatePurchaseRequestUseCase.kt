@@ -8,6 +8,7 @@ data class CreatePurchaseRequestCommand(
     val amount: Double,
 )
 
+
 class CreatePurchaseRequestUseCase(
     private val clock: Clock,
     private val idGenerator: IdGenerator,

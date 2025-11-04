@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
-import pivot.app.test.purchaserequests.domain.adapter.PurchaseRequestRepository
+import pivot.app.test.purchaserequests.domain.adapter.PostgresPurchaseRequestRepository
 import pivot.app.test.purchaserequests.domain.objects.PurchaseRequest
 import pivot.app.test.purchaserequests.domain.objects.Status
 import java.time.LocalDateTime
@@ -16,11 +16,11 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 @JooqTest
-@Import(PurchaseRequestRepository::class)
+@Import(PostgresPurchaseRequestRepository::class)
 @Testcontainers
 class PostgresPurchaseRequestRepositoryTest {
     @Autowired
-    private lateinit var purchaseRequestRepository: PurchaseRequestRepository
+    private lateinit var purchaseRequestRepository: PostgresPurchaseRequestRepository
 
     @Test
     fun findById_whenMissing_returnsNull() {

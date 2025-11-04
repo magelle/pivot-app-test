@@ -4,9 +4,7 @@ import org.junit.Test
 import pivot.app.test.purchaserequests.domain.objects.Alert
 import pivot.app.test.purchaserequests.domain.objects.PurchaseRequest
 import pivot.app.test.purchaserequests.domain.objects.Status
-import pivot.app.test.purchaserequests.domain.usecases.CreatePurchaseRequestCommand
-import pivot.app.test.purchaserequests.domain.usecases.CreatePurchaseRequestUseCase
-import pivot.app.test.purchaserequests.domain.usecases.GetPurchaseRequestUseCase
+import pivot.app.test.purchaserequests.domain.usecases.*
 import java.time.LocalDateTime
 import kotlin.test.assertEquals
 
@@ -17,6 +15,8 @@ class PurchaseRequestTests {
     val alertSystem = TestingAlertSystem()
     val purchaseRequestRepository = InMemoryPurchaseRequestRepository()
     val createPurchaseRequest = CreatePurchaseRequestUseCase(clock, idGenerator, alertSystem, purchaseRequestRepository)
+    val approvePurchaseRequest = ApprovePurchaseRequest(purchaseRequestRepository)
+    val declinePurchaseRequest = DeclinePurchaseRequest(purchaseRequestRepository)
 
     val getPurchaseRequest = GetPurchaseRequestUseCase(purchaseRequestRepository)
 
@@ -79,4 +79,39 @@ class PurchaseRequestTests {
         alertSystem.assertNoAlertWasReceived()
     }
 
+    @Test
+    fun `should approve a purchase request`() {
+        val request = PurchaseRequest(
+            id = 23,
+            companyId = 45,
+            description = "description",
+            amount = 60.0,
+            issueDate = LocalDateTime.now(),
+            status = Status.SUBMITTED
+        )
+        purchaseRequestRepository.save(request)
+
+        approvePurchaseRequest.approve(23)
+
+        val approved = getPurchaseRequest.get(23)
+        assertEquals(Status.APPROVED, approved?.status)
+    }
+
+    @Test
+    fun `should decline a purchase request`() {
+        val request = PurchaseRequest(
+            id = 23,
+            companyId = 45,
+            description = "description",
+            amount = 60.0,
+            issueDate = LocalDateTime.now(),
+            status = Status.SUBMITTED
+        )
+        purchaseRequestRepository.save(request)
+
+        declinePurchaseRequest.decline(23)
+
+        val declined = getPurchaseRequest.get(23)
+        assertEquals(Status.DECLINE, declined?.status)
+    }
 }

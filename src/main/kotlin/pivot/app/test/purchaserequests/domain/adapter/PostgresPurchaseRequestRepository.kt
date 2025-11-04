@@ -7,7 +7,7 @@ import pivot.app.test.purchaserequests.domain.objects.PurchaseRequest
 import pivot.app.test.purchaserequests.domain.objects.PurchaseRequestRepository
 import pivot.app.test.purchaserequests.domain.objects.Status
 
-class PurchaseRequestRepository(private val dsl: DSLContext) : PurchaseRequestRepository {
+class PostgresPurchaseRequestRepository(private val dsl: DSLContext) : PurchaseRequestRepository {
     override fun findById(id: Int): PurchaseRequest? {
         val result: PurchaseRequestRecord? = dsl.fetchOne(PURCHASE_REQUEST, PURCHASE_REQUEST.ID.eq(id))
         return result?.let {
