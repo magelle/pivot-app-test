@@ -1,4 +1,4 @@
-package pivot.app.test.purchasesrequest
+package pivot.app.test.purchasesrequest.adapter
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
-import pivot.app.test.purchaserequests.domain.adapter.PostgresPurchaseRequestRepository
+import pivot.app.test.purchaserequests.adapter.PostgresPurchaseRequestRepository
 import pivot.app.test.purchaserequests.domain.objects.PurchaseRequest
 import pivot.app.test.purchaserequests.domain.objects.Status
 import java.time.LocalDateTime

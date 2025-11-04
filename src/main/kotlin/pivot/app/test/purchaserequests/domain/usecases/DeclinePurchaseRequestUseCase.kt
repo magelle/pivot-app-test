@@ -1,9 +1,13 @@
 package pivot.app.test.purchaserequests.domain.usecases
 
+import org.springframework.stereotype.Service
 import pivot.app.test.purchaserequests.domain.objects.PurchaseRequestRepository
 import pivot.app.test.purchaserequests.domain.objects.Status
 
-class DeclinePurchaseRequest(private val purchaseRequestRepository: PurchaseRequestRepository) {
+@Service
+class DeclinePurchaseRequestUseCase(
+    private val purchaseRequestRepository: PurchaseRequestRepository
+) {
     fun decline(id: Int) {
         val r = purchaseRequestRepository.findById(id)
         r?.let {

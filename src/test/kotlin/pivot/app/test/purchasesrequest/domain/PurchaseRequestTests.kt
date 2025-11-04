@@ -1,10 +1,14 @@
-package pivot.app.test.purchasesrequest
+package pivot.app.test.purchasesrequest.domain
 
 import org.junit.Test
 import pivot.app.test.purchaserequests.domain.objects.Alert
 import pivot.app.test.purchaserequests.domain.objects.PurchaseRequest
 import pivot.app.test.purchaserequests.domain.objects.Status
-import pivot.app.test.purchaserequests.domain.usecases.*
+import pivot.app.test.purchaserequests.domain.usecases.ApprovePurchaseRequestUseCase
+import pivot.app.test.purchaserequests.domain.usecases.CreatePurchaseRequestCommand
+import pivot.app.test.purchaserequests.domain.usecases.CreatePurchaseRequestUseCase
+import pivot.app.test.purchaserequests.domain.usecases.DeclinePurchaseRequestUseCase
+import pivot.app.test.purchaserequests.domain.usecases.GetPurchaseRequestUseCase
 import java.time.LocalDateTime
 import kotlin.test.assertEquals
 
@@ -15,8 +19,8 @@ class PurchaseRequestTests {
     val alertSystem = TestingAlertSystem()
     val purchaseRequestRepository = InMemoryPurchaseRequestRepository()
     val createPurchaseRequest = CreatePurchaseRequestUseCase(clock, idGenerator, alertSystem, purchaseRequestRepository)
-    val approvePurchaseRequest = ApprovePurchaseRequest(purchaseRequestRepository)
-    val declinePurchaseRequest = DeclinePurchaseRequest(purchaseRequestRepository)
+    val approvePurchaseRequest = ApprovePurchaseRequestUseCase(purchaseRequestRepository)
+    val declinePurchaseRequest = DeclinePurchaseRequestUseCase(purchaseRequestRepository)
 
     val getPurchaseRequest = GetPurchaseRequestUseCase(purchaseRequestRepository)
 
@@ -31,9 +35,9 @@ class PurchaseRequestTests {
             amount = 10.00
         )
 
-        val id = createPurchaseRequest.create(createPurchaseRequestCommand)
+        val purchaseRequest = createPurchaseRequest.create(createPurchaseRequestCommand)
 
-        val createdPurchaseRequest = getPurchaseRequest.get(id)
+        val saved = getPurchaseRequest.get(purchaseRequest.id)
 
         assertEquals(
             PurchaseRequest(
@@ -43,7 +47,7 @@ class PurchaseRequestTests {
                 amount = 10.00,
                 status = Status.SUBMITTED,
                 issueDate = issueDate
-            ), createdPurchaseRequest
+            ), saved
         )
     }
 

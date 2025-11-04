@@ -1,12 +1,14 @@
-package pivot.app.test.purchaserequests.domain.adapter
+package pivot.app.test.purchaserequests.adapter
 
 import com.sivalabs.bookmarks.jooq.tables.PurchaseRequest.PURCHASE_REQUEST
 import com.sivalabs.bookmarks.jooq.tables.records.PurchaseRequestRecord
 import org.jooq.DSLContext
+import org.springframework.stereotype.Repository
 import pivot.app.test.purchaserequests.domain.objects.PurchaseRequest
 import pivot.app.test.purchaserequests.domain.objects.PurchaseRequestRepository
 import pivot.app.test.purchaserequests.domain.objects.Status
 
+@Repository
 class PostgresPurchaseRequestRepository(private val dsl: DSLContext) : PurchaseRequestRepository {
     override fun findById(id: Int): PurchaseRequest? {
         val result: PurchaseRequestRecord? = dsl.fetchOne(PURCHASE_REQUEST, PURCHASE_REQUEST.ID.eq(id))

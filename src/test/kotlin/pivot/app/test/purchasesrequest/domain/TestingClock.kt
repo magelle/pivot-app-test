@@ -1,4 +1,4 @@
-package pivot.app.test.purchasesrequest
+package pivot.app.test.purchasesrequest.domain
 
 import pivot.app.test.purchaserequests.domain.objects.Clock
 import java.time.LocalDateTime

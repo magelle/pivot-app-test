@@ -1,17 +1,21 @@
-### Create a new counter
-PUT http://localhost:8080/counter/create
+### Create a new Purchase Request
+POST http://localhost:8080/purchase-request/create
 Accept: application/json
+Content-Type: application/json
 
-### Get Counter value
-GET http://localhost:8080/counter/1761820555
+{ "companyId": 1, "description": "macbook pro", "amount": 3000.00 }
+
+### Get Purchase Request
+GET http://localhost:8080/purchase-request/1338194153
 Accept: application/json
+Content-Type: application/json
 
-### Increment Counter Value
-
-POST http://localhost:8080/counter/1761820555/inc
+### Approve Purchase Request
+PUT http://localhost:8080/purchase-request/1338194153/approve
 Accept: application/json
+Content-Type: application/json
 
 
-### ### Decrement Counter Value
-POST http://localhost:8080/counter/1761820555/dec
+### Decline Purchase Request
+PUT http://localhost:8080/purchase-request/1338194153/decline
 Accept: application/json
