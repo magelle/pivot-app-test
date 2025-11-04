@@ -1,4 +1,4 @@
-package pivot.app.test.purchasesrequest.domain
+package pivot.app.test.purchasesrequests.domain
 
 import org.junit.jupiter.api.assertNull
 import pivot.app.test.purchaserequests.domain.objects.Alert

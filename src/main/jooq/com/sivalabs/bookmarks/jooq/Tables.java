@@ -4,6 +4,7 @@
 package com.sivalabs.bookmarks.jooq;
 
 
+import com.sivalabs.bookmarks.jooq.tables.Budget;
 import com.sivalabs.bookmarks.jooq.tables.Counter;
 import com.sivalabs.bookmarks.jooq.tables.PurchaseRequest;
 
@@ -13,6 +14,11 @@ import com.sivalabs.bookmarks.jooq.tables.PurchaseRequest;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>public.budget</code>.
+     */
+    public static final Budget BUDGET = Budget.BUDGET;
 
     /**
      * The table <code>public.counter</code>.

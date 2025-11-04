@@ -5,7 +5,7 @@ import pivot.app.test.purchaserequests.domain.objects.PurchaseRequest
 import pivot.app.test.purchaserequests.domain.usecases.*
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/purchase-requests")
 class Controller(
     private val getPurchaseRequestUseCase: GetPurchaseRequestUseCase,
     private val createPurchaseRequestUseCase: CreatePurchaseRequestUseCase,
@@ -13,22 +13,22 @@ class Controller(
     private val declinePurchaseRequestUseCase: DeclinePurchaseRequestUseCase,
 ) {
 
-    @PostMapping("/purchase-request/create")
+    @PostMapping("/create")
     fun create(@RequestBody createCommand: CreatePurchaseRequestCommand): PurchaseRequest {
         return createPurchaseRequestUseCase.create(createCommand)
     }
 
-    @GetMapping("/purchase-request/{id}")
+    @GetMapping("/{id}")
     fun get(@PathVariable id: Int): PurchaseRequest? =
         getPurchaseRequestUseCase.get(id)
 
-    @PutMapping("/purchase-request/{id}/approve")
+    @PutMapping("/{id}/approve")
     fun approve(@PathVariable id: Int): PurchaseRequest? {
         approvePurchaseRequestUseCase.approve(id)
         return getPurchaseRequestUseCase.get(id)
     }
 
-    @PutMapping("/purchase-request/{id}/decline")
+    @PutMapping("/{id}/decline")
     fun decline(@PathVariable id: Int): PurchaseRequest? {
         declinePurchaseRequestUseCase.decline(id)
         return getPurchaseRequestUseCase.get(id)

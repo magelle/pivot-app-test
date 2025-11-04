@@ -1,4 +1,4 @@
-package pivot.app.test.purchasesrequest.adapter
+package pivot.app.test.purchasesrequests.adapter
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,6 +12,7 @@ import pivot.app.test.purchaserequests.adapter.PostgresPurchaseRequestRepository
 import pivot.app.test.purchaserequests.domain.objects.PurchaseRequest
 import pivot.app.test.purchaserequests.domain.objects.Status
 import java.time.LocalDateTime
+import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
@@ -73,6 +74,44 @@ class PostgresPurchaseRequestRepositoryTest {
         assertEquals("Ergonomic Mouse", loaded?.description)
         assertEquals(19.99, loaded?.amount)
         assertEquals(Status.APPROVED, loaded?.status)
+    }
+
+    @Test
+    fun `find by companyId and status when no matches`() {
+        // when
+        val results = purchaseRequestRepository.findByCompanyIdAndStatus(999, Status.SUBMITTED)
+        // then
+        assertEquals(0, results.size)
+    }
+
+    @Test
+    fun `find by companyId and status returns only matching budgets`() {
+        val now = LocalDateTime.of(2024, 6, 1, 12, 0, 0)
+        // Prepare different companies and statuses
+        val a1 = PurchaseRequest(
+            id = 101,
+            companyId = 10,
+            description = "A1",
+            amount = 100.0,
+            issueDate = now,
+            status = Status.SUBMITTED
+        )
+        val a2 = a1.copy(id = 102, description = "A2", status = Status.APPROVED)
+        val a3 = a1.copy(id = 103, description = "A3", status = Status.SUBMITTED)
+        val b1 = a1.copy(id = 201, companyId = 20, description = "B1", status = Status.SUBMITTED)
+        // persist
+        purchaseRequestRepository.save(a1)
+        purchaseRequestRepository.save(a2)
+        purchaseRequestRepository.save(a3)
+        purchaseRequestRepository.save(b1)
+
+        // when: query for company 10 with SUBMITTED status
+        val results = purchaseRequestRepository.findByCompanyIdAndStatus(10, Status.SUBMITTED)
+
+        // then: should return only a1 and a3, in any order
+        assertEquals(2, results.size)
+        assertContains(results, a1)
+        assertContains(results, a3)
     }
 
     companion object {

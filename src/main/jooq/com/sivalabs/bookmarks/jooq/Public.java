@@ -4,6 +4,7 @@
 package com.sivalabs.bookmarks.jooq;
 
 
+import com.sivalabs.bookmarks.jooq.tables.Budget;
 import com.sivalabs.bookmarks.jooq.tables.Counter;
 import com.sivalabs.bookmarks.jooq.tables.PurchaseRequest;
 
@@ -27,6 +28,11 @@ public class Public extends SchemaImpl {
      * The reference instance of <code>public</code>
      */
     public static final Public PUBLIC = new Public();
+
+    /**
+     * The table <code>public.budget</code>.
+     */
+    public final Budget BUDGET = Budget.BUDGET;
 
     /**
      * The table <code>public.counter</code>.
@@ -54,6 +60,7 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            Budget.BUDGET,
             Counter.COUNTER,
             PurchaseRequest.PURCHASE_REQUEST
         );

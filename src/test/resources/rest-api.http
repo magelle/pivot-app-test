@@ -1,21 +1,33 @@
 ### Create a new Purchase Request
-POST http://localhost:8080/purchase-request/create
+POST http://localhost:8080/purchase-requests/create
 Accept: application/json
 Content-Type: application/json
 
-{ "companyId": 1, "description": "macbook pro", "amount": 3000.00 }
+{ "companyId": 1, "description": "macbook air", "amount": 2000.00 }
 
 ### Get Purchase Request
-GET http://localhost:8080/purchase-request/1338194153
+GET http://localhost:8080/purchase-requests/1341786414
 Accept: application/json
 Content-Type: application/json
 
 ### Approve Purchase Request
-PUT http://localhost:8080/purchase-request/1338194153/approve
+PUT http://localhost:8080/purchase-requests/1341786414/approve
 Accept: application/json
 Content-Type: application/json
 
 
 ### Decline Purchase Request
-PUT http://localhost:8080/purchase-request/1338194153/decline
+PUT http://localhost:8080/purchase-requests/1338194153/decline
 Accept: application/json
+
+### Create a new Budget
+POST http://localhost:8080/budgets/create
+Accept: application/json
+Content-Type: application/json
+
+{ "companyId": 2 }
+
+### Get a Budget
+GET http://localhost:8080/budgets/1341718489
+Accept: application/json
+Content-Type: application/json

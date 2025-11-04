@@ -4,8 +4,10 @@
 package com.sivalabs.bookmarks.jooq;
 
 
+import com.sivalabs.bookmarks.jooq.tables.Budget;
 import com.sivalabs.bookmarks.jooq.tables.Counter;
 import com.sivalabs.bookmarks.jooq.tables.PurchaseRequest;
+import com.sivalabs.bookmarks.jooq.tables.records.BudgetRecord;
 import com.sivalabs.bookmarks.jooq.tables.records.CounterRecord;
 import com.sivalabs.bookmarks.jooq.tables.records.PurchaseRequestRecord;
 
@@ -26,6 +28,7 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<BudgetRecord> BUDGET_PKEY = Internal.createUniqueKey(Budget.BUDGET, DSL.name("budget_pkey"), new TableField[] { Budget.BUDGET.ID }, true);
     public static final UniqueKey<CounterRecord> COUNTER_PKEY = Internal.createUniqueKey(Counter.COUNTER, DSL.name("counter_pkey"), new TableField[] { Counter.COUNTER.ID }, true);
     public static final UniqueKey<PurchaseRequestRecord> PURCHASE_REQUEST_PKEY = Internal.createUniqueKey(PurchaseRequest.PURCHASE_REQUEST, DSL.name("purchase_request_pkey"), new TableField[] { PurchaseRequest.PURCHASE_REQUEST.ID }, true);
 }

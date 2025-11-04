@@ -12,16 +12,7 @@ import pivot.app.test.purchaserequests.domain.objects.Status
 class PostgresPurchaseRequestRepository(private val dsl: DSLContext) : PurchaseRequestRepository {
     override fun findById(id: Int): PurchaseRequest? {
         val result: PurchaseRequestRecord? = dsl.fetchOne(PURCHASE_REQUEST, PURCHASE_REQUEST.ID.eq(id))
-        return result?.let {
-            PurchaseRequest(
-                result.id,
-                result.companyid,
-                result.description,
-                result.amount,
-                result.issuedate,
-                Status.valueOf(result.status)
-            )
-        }
+        return result?.let { mapToBusinessObject(it) }
     }
 
     override fun save(purchaseRequest: PurchaseRequest) {
@@ -38,5 +29,29 @@ class PostgresPurchaseRequestRepository(private val dsl: DSLContext) : PurchaseR
         else
             dsl.executeInsert(pr)
     }
+
+    override fun findByCompanyIdAndStatus(
+        companyId: Int,
+        status: Status
+    ): List<PurchaseRequest> {
+        val result = dsl.fetch(
+            PURCHASE_REQUEST,
+            PURCHASE_REQUEST.COMPANYID.eq(companyId).and(
+                PURCHASE_REQUEST.STATUS.eq(
+                    status.toString()
+                )
+            )
+        )
+        return result.map { mapToBusinessObject(it) }
+    }
+
+    private fun mapToBusinessObject(result: PurchaseRequestRecord): PurchaseRequest = PurchaseRequest(
+        result.id,
+        result.companyid,
+        result.description,
+        result.amount,
+        result.issuedate,
+        Status.valueOf(result.status)
+    )
 
 }
