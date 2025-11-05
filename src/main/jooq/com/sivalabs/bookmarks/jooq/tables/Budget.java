@@ -4,15 +4,19 @@
 package com.sivalabs.bookmarks.jooq.tables;
 
 
+import com.sivalabs.bookmarks.jooq.Indexes;
 import com.sivalabs.bookmarks.jooq.Keys;
 import com.sivalabs.bookmarks.jooq.Public;
 import com.sivalabs.bookmarks.jooq.tables.records.BudgetRecord;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function3;
+import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
@@ -55,9 +59,9 @@ public class Budget extends TableImpl<BudgetRecord> {
     public final TableField<BudgetRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>public.budget.companyid</code>.
+     * The column <code>public.budget.company_id</code>.
      */
-    public final TableField<BudgetRecord, Integer> COMPANYID = createField(DSL.name("companyid"), SQLDataType.INTEGER, this, "");
+    public final TableField<BudgetRecord, Integer> COMPANY_ID = createField(DSL.name("company_id"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>public.budget.total</code>.
@@ -100,6 +104,11 @@ public class Budget extends TableImpl<BudgetRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
+    }
+
+    @Override
+    public List<Index> getIndexes() {
+        return Arrays.asList(Indexes.IDX_BUDGET_COMPANY_ID);
     }
 
     @Override

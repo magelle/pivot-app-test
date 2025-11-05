@@ -11,7 +11,10 @@ import pivot.app.test.purchaserequests.domain.objects.Status
 @Repository
 class PostgresPurchaseRequestRepository(private val dsl: DSLContext) : PurchaseRequestRepository {
     override fun findById(id: Int): PurchaseRequest? {
-        val result: PurchaseRequestRecord? = dsl.fetchOne(PURCHASE_REQUEST, PURCHASE_REQUEST.ID.eq(id))
+        val result: PurchaseRequestRecord? = dsl.fetchOne(
+            PURCHASE_REQUEST,
+            PURCHASE_REQUEST.ID.eq(id)
+        )
         return result?.let { mapToBusinessObject(it) }
     }
 
@@ -36,7 +39,7 @@ class PostgresPurchaseRequestRepository(private val dsl: DSLContext) : PurchaseR
     ): List<PurchaseRequest> {
         val result = dsl.fetch(
             PURCHASE_REQUEST,
-            PURCHASE_REQUEST.COMPANYID.eq(companyId).and(
+            PURCHASE_REQUEST.COMPANY_ID.eq(companyId).and(
                 PURCHASE_REQUEST.STATUS.eq(
                     status.toString()
                 )
@@ -47,7 +50,7 @@ class PostgresPurchaseRequestRepository(private val dsl: DSLContext) : PurchaseR
 
     private fun mapToBusinessObject(result: PurchaseRequestRecord): PurchaseRequest = PurchaseRequest(
         result.id,
-        result.companyid,
+        result.companyId,
         result.description,
         result.amount,
         result.issuedate,

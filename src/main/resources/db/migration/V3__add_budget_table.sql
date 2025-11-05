@@ -1,6 +1,6 @@
 CREATE TABLE budget
 (
     id          INT PRIMARY KEY,
-    companyId   INT,
+    company_id   INT,
     total      DOUBLE PRECISION
 );

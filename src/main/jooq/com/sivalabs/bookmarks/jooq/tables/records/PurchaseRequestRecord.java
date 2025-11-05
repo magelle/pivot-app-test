@@ -38,16 +38,16 @@ public class PurchaseRequestRecord extends UpdatableRecordImpl<PurchaseRequestRe
     }
 
     /**
-     * Setter for <code>public.purchase_request.companyid</code>.
+     * Setter for <code>public.purchase_request.company_id</code>.
      */
-    public void setCompanyid(Integer value) {
+    public void setCompanyId(Integer value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.purchase_request.companyid</code>.
+     * Getter for <code>public.purchase_request.company_id</code>.
      */
-    public Integer getCompanyid() {
+    public Integer getCompanyId() {
         return (Integer) get(1);
     }
 
@@ -137,7 +137,7 @@ public class PurchaseRequestRecord extends UpdatableRecordImpl<PurchaseRequestRe
 
     @Override
     public Field<Integer> field2() {
-        return PurchaseRequest.PURCHASE_REQUEST.COMPANYID;
+        return PurchaseRequest.PURCHASE_REQUEST.COMPANY_ID;
     }
 
     @Override
@@ -167,7 +167,7 @@ public class PurchaseRequestRecord extends UpdatableRecordImpl<PurchaseRequestRe
 
     @Override
     public Integer component2() {
-        return getCompanyid();
+        return getCompanyId();
     }
 
     @Override
@@ -197,7 +197,7 @@ public class PurchaseRequestRecord extends UpdatableRecordImpl<PurchaseRequestRe
 
     @Override
     public Integer value2() {
-        return getCompanyid();
+        return getCompanyId();
     }
 
     @Override
@@ -228,7 +228,7 @@ public class PurchaseRequestRecord extends UpdatableRecordImpl<PurchaseRequestRe
 
     @Override
     public PurchaseRequestRecord value2(Integer value) {
-        setCompanyid(value);
+        setCompanyId(value);
         return this;
     }
 
@@ -281,11 +281,11 @@ public class PurchaseRequestRecord extends UpdatableRecordImpl<PurchaseRequestRe
     /**
      * Create a detached, initialised PurchaseRequestRecord
      */
-    public PurchaseRequestRecord(Integer id, Integer companyid, String description, Double amount, LocalDateTime issuedate, String status) {
+    public PurchaseRequestRecord(Integer id, Integer companyId, String description, Double amount, LocalDateTime issuedate, String status) {
         super(PurchaseRequest.PURCHASE_REQUEST);
 
         setId(id);
-        setCompanyid(companyid);
+        setCompanyId(companyId);
         setDescription(description);
         setAmount(amount);
         setIssuedate(issuedate);

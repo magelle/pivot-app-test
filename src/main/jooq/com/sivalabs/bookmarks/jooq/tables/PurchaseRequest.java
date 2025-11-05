@@ -56,9 +56,9 @@ public class PurchaseRequest extends TableImpl<PurchaseRequestRecord> {
     public final TableField<PurchaseRequestRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>public.purchase_request.companyid</code>.
+     * The column <code>public.purchase_request.company_id</code>.
      */
-    public final TableField<PurchaseRequestRecord, Integer> COMPANYID = createField(DSL.name("companyid"), SQLDataType.INTEGER, this, "");
+    public final TableField<PurchaseRequestRecord, Integer> COMPANY_ID = createField(DSL.name("company_id"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>public.purchase_request.description</code>.

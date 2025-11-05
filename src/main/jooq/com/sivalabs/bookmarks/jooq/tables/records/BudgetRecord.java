@@ -36,16 +36,16 @@ public class BudgetRecord extends UpdatableRecordImpl<BudgetRecord> implements R
     }
 
     /**
-     * Setter for <code>public.budget.companyid</code>.
+     * Setter for <code>public.budget.company_id</code>.
      */
-    public void setCompanyid(Integer value) {
+    public void setCompanyId(Integer value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.budget.companyid</code>.
+     * Getter for <code>public.budget.company_id</code>.
      */
-    public Integer getCompanyid() {
+    public Integer getCompanyId() {
         return (Integer) get(1);
     }
 
@@ -93,7 +93,7 @@ public class BudgetRecord extends UpdatableRecordImpl<BudgetRecord> implements R
 
     @Override
     public Field<Integer> field2() {
-        return Budget.BUDGET.COMPANYID;
+        return Budget.BUDGET.COMPANY_ID;
     }
 
     @Override
@@ -108,7 +108,7 @@ public class BudgetRecord extends UpdatableRecordImpl<BudgetRecord> implements R
 
     @Override
     public Integer component2() {
-        return getCompanyid();
+        return getCompanyId();
     }
 
     @Override
@@ -123,7 +123,7 @@ public class BudgetRecord extends UpdatableRecordImpl<BudgetRecord> implements R
 
     @Override
     public Integer value2() {
-        return getCompanyid();
+        return getCompanyId();
     }
 
     @Override
@@ -139,7 +139,7 @@ public class BudgetRecord extends UpdatableRecordImpl<BudgetRecord> implements R
 
     @Override
     public BudgetRecord value2(Integer value) {
-        setCompanyid(value);
+        setCompanyId(value);
         return this;
     }
 
@@ -171,11 +171,11 @@ public class BudgetRecord extends UpdatableRecordImpl<BudgetRecord> implements R
     /**
      * Create a detached, initialised BudgetRecord
      */
-    public BudgetRecord(Integer id, Integer companyid, Double total) {
+    public BudgetRecord(Integer id, Integer companyId, Double total) {
         super(Budget.BUDGET);
 
         setId(id);
-        setCompanyid(companyid);
+        setCompanyId(companyId);
         setTotal(total);
         resetChangedOnNotNull();
     }

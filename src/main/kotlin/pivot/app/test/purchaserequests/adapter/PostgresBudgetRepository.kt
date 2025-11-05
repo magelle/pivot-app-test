@@ -15,7 +15,7 @@ class PostgresBudgetRepository(private val dsl: DSLContext) : BudgetRepository {
         return result?.let {
             Budget(
                 id = it.id,
-                companyId = it.companyid,
+                companyId = it.companyId,
                 total = it.total,
             )
         }

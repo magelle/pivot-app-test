@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS idx_budget_company_id ON budget (company_id);
